@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="uk">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Мій Проєкт</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+  <div id="gameMenu" class="menu-overlay">
+<div class="readme">
+      <h1>Усім здоров</h1>
+      <p>Це бета версія сайту тому потрібні невеликі уточнення</p>
+      <p>Це сайт гра тактика де ти в ролі одного з великих правителів України (Зараз на вибір є тільки Бодька Хмель)</p>
+      
+      <h2>Атаки</h2>
+      
+      <h3>Задум Молодого Джури</h3>
+      <p>Молодий Джура радить вам ідею як атакувати ворога. Наносить від 40 до 120 хп</p>
+      
+      <h3>Залп із Засідки</h3>
+      <p>Ви разом з частиною війська ховаєтесь у засаду і атакуєте ворога, але щоб нанести як умога більше урона потрібно прицілитися правильно прицілювання на a/d напад на space. Наносить від 0 якщо зовсім мимо і 80 якщо точне попадання</p>
+      
+      <h3>Штабний Удар</h3>
+      <p>Ви вирішуєте не придумувати нічого оригінального і атакувати простою атакою. Наносить 50 хп</p>
+      
+      <h3>Гетьманське Натхнення</h3>
+      <p>Ви говорите неймовірно натхненну і рішучу промову (ви навіть самі починаєте більше вірити в перемогу). +50 хп війську +1.25 множитель урона на наступну атаку</p>
+      
+      <h2>Особливості</h2>
+      <p>Кожен ворог має расу Московит - Татар - Поляк</p>
+      <p>в залежності від раси різні персонажі по різному наносять урона</p>
+      <p>Наприклад Бодька має +15% по полякам і -15% по татарам</p>
+      
+      <h2>Також кожен з персонажів має особливості</h2>
+      <p>Наприклад Бодька має буст до урону 1.25</p>
+      <p>Зараз в виборі є тільки Бодька Хмель але скоро до нього підтягнуться й Олежко Величкий з Байдою Вишнелюбом</p>
+    </div>
+    <div class="characters hidden">
+  <div class="char-details">
+    <img src="https://lh3.googleusercontent.com/d/1GZtuUiAZ7RML6HIC12HXH35ZfjUOafzG" alt="Бодька">
+    <h3>Бодька Хмельницький</h3>
+    <p class="desc">Проміняв спокій на люльку та гетьманство. Замість сімейних сварок пішов розносити ляхів під Жовтими Водами.</p>
+    <p class="stats">Військо Запорозьке. +15% проти Ляхів, -15% проти Татар. Баф x1.25.</p>
+    <button onclick="selectHero('bodka')">Обрати</button>
+  </div>
+
+  <div class="char-selector-list">
+    <button class="hero-tab active">Бодька Хмельницький</button>
+    
+  </div>
+</div>
+    <h1 id="menuTitle">Головне Меню</h1>
+    <p id="menuSubtitle">Натисніть кнопку для початку</p>
+    <div id="menuButtons">
+      <button id="startBtn">Розпочати Бій</button>
+      <button id="shopBtn">Магазин</button>
+      <button id="charBtn" onclick="pickChar()">Персонажі</button>
+    </div>
+  </div>
+<div id="player" class="player ent">
+  <div id="playerPortrait"></div>
+  <div id="playerHp" class="hp-text">200</div>
+  <div id="playerName">Бодька Хмельницький</div>
+</div><div id="enemy" class="enemy ent">
+  <div id="enemyPortrait"></div>
+  <div id="enemyHp" class="hp-text">150</div>
+  <div id="enemyName">Московит</div>
+</div>
+  <div class="hotbar">
+    <button onclick="attack('random')" class="attack" id="randomBtn">Задум Молодого Джури</button>
+    <button onclick="summonStrike()" class="attack" id="strikeBtn">Залп із Засідки</button>
+    <button onclick="attack('basic')" class="attack" id="basicBtn">Штабний Удар</button>
+    <button onclick="attack('heal')" class="attack" id="healBtn">Гетьманське Натхнення</button>
+  </div>
+  <div class="bar hidden">
+    <div class="slider" id="slider"></div>
+    <div class="slider playerSl" id="playerSl"></div>
+  </div>
+  <script src="script.js" defer></script>
+</body>
+
+</html>
