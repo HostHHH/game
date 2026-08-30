@@ -10,70 +10,139 @@
 
 <body>
   <div id="gameMenu" class="menu-overlay">
-<div class="readme">
+
+    <div class="shop-screen hidden" id="shop">
+      <div class="score shopVar" id="ShopScore"></div>
+      <button class="wood-btn exit-shop-btn" onclick="showShop()">
+        ✖ Вийти
+      </button>
+
+      <!-- Список товарів на сувої -->
+      <div class="scroll-shop-list" id="shopGoodsList"></div>
+
+      <!-- Панель Інвентарю та Мішка (Компактна, зміщена вправо) -->
+      <div class="shop-inventory-panel">
+        <!-- Склад (Інвентар 5x4 = 20 слотів) -->
+        <div class="panel-section">
+          <div class="section-header">
+            <span class="section-title">Склад</span>
+            <div class="header-tools">
+              <span class="slot-count" id="invCount">0/20</span>
+              <div class="trash-zone" id="trashZone" title="Смітник: перетягніть сюди предмет для видалення">
+                <span class="trash-icon">🗑️</span>
+              </div>
+            </div>
+          </div>
+          <div class="inventory-grid" id="inventoryGrid"></div>
+        </div>
+
+        <div class="panel-section bag-section">
+          <div class="section-header">
+            <span class="section-title">Бойовий мішок</span>
+            <span class="slot-count" id="bagCount">0/5</span>
+          </div>
+          <div class="bag-grid" id="bagGrid"></div>
+        </div>
+      </div>
+
+      <div id="shopToast" class="shop-toast hidden"></div>
+    </div>
+
+    <div class="readme">
       <h1>Усім здоров</h1>
       <p>Це бета версія сайту тому потрібні невеликі уточнення</p>
       <p>Це сайт гра тактика де ти в ролі одного з великих правителів України (Зараз на вибір є тільки Бодька Хмель)</p>
-      
+
       <h2>Атаки</h2>
-      
+
       <h3>Задум Молодого Джури</h3>
       <p>Молодий Джура радить вам ідею як атакувати ворога. Наносить від 40 до 120 хп</p>
-      
+
       <h3>Залп із Засідки</h3>
-      <p>Ви разом з частиною війська ховаєтесь у засаду і атакуєте ворога, але щоб нанести як умога більше урона потрібно прицілитися правильно прицілювання на a/d напад на space. Наносить від 0 якщо зовсім мимо і 80 якщо точне попадання</p>
-      
+      <p>Ви разом з частиною війська ховаєтесь у засаду і атакуєте ворога, але щоб нанести як умога більше урона
+        потрібно прицілитися правильно прицілювання на a/d напад на space. Наносить від 0 якщо зовсім мимо і 80 якщо
+        точне попадання</p>
+
       <h3>Штабний Удар</h3>
       <p>Ви вирішуєте не придумувати нічого оригінального і атакувати простою атакою. Наносить 50 хп</p>
-      
+
       <h3>Гетьманське Натхнення</h3>
-      <p>Ви говорите неймовірно натхненну і рішучу промову (ви навіть самі починаєте більше вірити в перемогу). +50 хп війську +1.25 множитель урона на наступну атаку</p>
-      
+      <p>Ви говорите неймовірно натхненну і рішучу промову (ви навіть самі починаєте більше вірити в перемогу). +50 хп
+        війську +1.25 множитель урона на наступну атаку</p>
+
       <h2>Особливості</h2>
       <p>Кожен ворог має расу Московит - Татар - Поляк</p>
       <p>в залежності від раси різні персонажі по різному наносять урона</p>
       <p>Наприклад Бодька має +15% по полякам і -15% по татарам</p>
-      
+
       <h2>Також кожен з персонажів має особливості</h2>
       <p>Наприклад Бодька має буст до урону 1.25</p>
       <p>Зараз в виборі є тільки Бодька Хмель але скоро до нього підтягнуться й Олежко Величкий з Байдою Вишнелюбом</p>
     </div>
     <div class="characters hidden">
-  <div class="char-details">
-    <img src="https://lh3.googleusercontent.com/d/1GZtuUiAZ7RML6HIC12HXH35ZfjUOafzG" alt="Бодька">
-    <h3>Бодька Хмельницький</h3>
-    <p class="desc">Проміняв спокій на люльку та гетьманство. Замість сімейних сварок пішов розносити ляхів під Жовтими Водами.</p>
-    <p class="stats">Військо Запорозьке. +15% проти Ляхів, -15% проти Татар. Баф x1.25.</p>
-    <button onclick="selectHero('bodka')">Обрати</button>
-  </div>
-
-  <div class="char-selector-list">
-    <button class="hero-tab active">Бодька Хмельницький</button>
-    
-  </div>
+      <div class="char-details">
+        <img src="https://lh3.googleusercontent.com/d/1GZtuUiAZ7RML6HIC12HXH35ZfjUOafzG" alt="Бодька">
+        <h3>Бодька Хмельницький</h3>
+        <p class="desc">Проміняв спокій на люльку та гетьманство. Замість сімейних сварок пішов розносити ляхів під
+          Жовтими Водами.</p>
+        <p class="stats">Військо Запорозьке. +15% проти Ляхів, -15% проти Татар. Баф x1.25.</p>
+        <button onclick="selectHero('bodka')">Обрати</button>
+      </div>
+      <div class="char-details hidden">
+  <img src="https://lh3.googleusercontent.com/d/1s-crFw98YTLUCE8CryYUqP0xGSmf6cSZ" alt="Олежко">
+  <h3>Олежко Передбач</h3>
+  <p class="desc">Прибив щит на ворота Царгорода й залутав купу золота. Помер від власного коня, але встиг навести страху на візантійців.</p>
+<p class="stats">Київська Русь. +15% проти Кацапів, -15% проти Татар.</p>
+<p class="stats">Отримує на 50% більше монет ніж інші</p>
+  <button onclick="selectHero('olezhko')">Обрати</button>
 </div>
+<div class="char-details hidden">
+  <img src="https://lh3.googleusercontent.com/d/1i8lX1vupJFUOkvU0qsd4r9lARJGUstbe" alt="Байда">
+  <h3>Байда Вишнелюб</h3>
+  <p class="desc">Збудував першу Запорозьку Січ на Хортиці. Замість того, щоб слухати султана, висів на ребрі й плював на турків.</p>
+<p class="stats">Запорозька Січ. +15% проти Татар, -15% проти Поляків.</p>
+  <button onclick="selectHero('baida')">Обрати</button>
+</div>
+      <div class="char-selector-list">
+        <button class="hero-tab active" onclick="pickingHero(0)">Бодька Хмельницький</button>
+        <button class="hero-tab " onclick="pickingHero(1)">Олежко Передбач</button>
+        <button class="hero-tab " onclick="pickingHero(2)">Байда Вишнелюб</button>
+      </div>
+    </div>
+
     <h1 id="menuTitle">Головне Меню</h1>
     <p id="menuSubtitle">Натисніть кнопку для початку</p>
     <div id="menuButtons">
       <button id="startBtn">Розпочати Бій</button>
-      <button id="shopBtn">Магазин</button>
+      <button id="shopBtn" onclick="showShop()">Магазин</button>
       <button id="charBtn" onclick="pickChar()">Персонажі</button>
     </div>
   </div>
-<div id="player" class="player ent">
-  <div id="playerPortrait"></div>
-  <div id="playerHp" class="hp-text">200</div>
-  <div id="playerName">Бодька Хмельницький</div>
-</div><div id="enemy" class="enemy ent">
-  <div id="enemyPortrait"></div>
-  <div id="enemyHp" class="hp-text">150</div>
-  <div id="enemyName">Московит</div>
-</div>
-  <div class="hotbar">
-    <button onclick="attack('random')" class="attack" id="randomBtn">Задум Молодого Джури</button>
-    <button onclick="summonStrike()" class="attack" id="strikeBtn">Залп із Засідки</button>
-    <button onclick="attack('basic')" class="attack" id="basicBtn">Штабний Удар</button>
-    <button onclick="attack('heal')" class="attack" id="healBtn">Гетьманське Натхнення</button>
+  <div class="score" id="score"></div>
+  <div id="player" class="player ent">
+    <div id="playerPortrait"></div>
+    <div id="playerHp" class="hp-text">200</div>
+    <div id="playerName">Бодька Хмельницький</div>
+  </div>
+  <div id="enemy" class="enemy ent">
+    <div id="enemyPortrait"></div>
+    <div id="enemyHp" class="hp-text">150</div>
+    <div id="enemyName">Московит</div>
+  </div>
+  <div class="hotbar" id="battleHotbar">
+    <div class="hotbar-attacks">
+      <button onclick="attack('random')" class="attack" id="randomBtn">Задум Молодого Джури</button>
+      <button onclick="summonStrike()" class="attack" id="strikeBtn">Залп із Засідки</button>
+      <button onclick="attack('basic')" class="attack" id="basicBtn">Штабний Удар</button>
+      <button onclick="attack('heal')" class="attack" id="healBtn">Гетьманське Натхнення</button>
+    </div>
+    <div class="hotbar-divider"></div>
+    <div class="hotbar-bag-container">
+      <div class="hotbar-bag-header">
+        <span class="hotbar-bag-title">Бойовий мішок</span>
+      </div>
+      <div class="battle-bag-grid" id="battleBagGrid"></div>
+    </div>
   </div>
   <div class="bar hidden">
     <div class="slider" id="slider"></div>
